@@ -1,0 +1,48 @@
+/* Navbar Helpers */
+[spacer] {
+  flex: 1 1 auto;
+}
+
+[title] {
+    -webkit-order: 0;
+    -ms-flex-order: 0;
+    order: 0;
+    -webkit-flex: 1 1 auto;
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    -webkit-align-self: auto;
+    -ms-flex-item-align: auto;
+    align-self: auto;
+}
+
+/* Global styles */
+.mat-toolbar,
+.mat-sidenav-container{
+    background: transparent;
+    background-color: transparent;
+}
+
+
+md-sidenav-container {
+    height: 100vh;
+}
+
+md-sidenav {
+    padding: 20px;
+    width: 250px;
+    z-index: 999;
+}
+
+.main-fab {
+    background-color: #1e88e5;
+    position: fixed;
+    bottom: 16px;
+    right: 16px;
+}
+
+/* Desktop media queries */
+@media (min-width: 700px) {
+    md-sidenav {
+        width: 350px;
+    }
+}
