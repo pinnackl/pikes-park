@@ -3,6 +3,8 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 
+import { HorizonService } from './horizon.service';
+
 @NgModule({
   declarations: [
     AppComponent
@@ -10,7 +12,7 @@ import { AppComponent } from './app.component';
   imports: [
     BrowserModule
   ],
-  providers: [],
+  providers: [HorizonService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
