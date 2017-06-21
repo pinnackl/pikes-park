@@ -1,6 +1,9 @@
 <md-sidenav-container>
   <md-sidenav #sidenav class="sidenav" mode="over">
     <!-- sidenav content -->
+    <div *ngFor="let menu of menus">
+      {{menu.name}}
+    </div>
   </md-sidenav>
 
   <!-- Toolbar -->
