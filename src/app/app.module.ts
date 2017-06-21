@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 
 import { HorizonService } from './horizon.service';
+import { PikesUserService } from './pikes-user/pikes-user.service';
 
 @NgModule({
   declarations: [
@@ -12,7 +13,7 @@ import { HorizonService } from './horizon.service';
   imports: [
     BrowserModule
   ],
-  providers: [HorizonService],
+  providers: [HorizonService, PikesUserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
