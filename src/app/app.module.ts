@@ -6,6 +6,8 @@ import { GooglemapComponent } from './googlemap/googlemap.component';
 
 import { AgmCoreModule } from '@agm/core';
 
+import { HorizonService } from './horizon.service';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -17,7 +19,7 @@ import { AgmCoreModule } from '@agm/core';
       apiKey: 'AIzaSyBV7ayzYxxlxvXsosIpgnQVtpLPwiP80Mw'
     })
   ],
-  providers: [],
-  bootstrap: [AppComponent, GooglemapComponent]
+  providers: [HorizonService],
+  bootstrap: [AppComponent]
 })
 export class AppModule { }
