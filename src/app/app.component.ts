@@ -22,8 +22,4 @@ export class AppComponent implements OnInit {
         this.menus = data;
       });
   }
-
-  closeSidenav() {
-    this.input.nativeElement.close();
-  }
 }
