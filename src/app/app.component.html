@@ -9,7 +9,8 @@
   <!-- Toolbar -->
   <md-toolbar>
     <button class="menu-btn" type="button" md-icon-button (click)="sidenav.open()"><md-icon>menu</md-icon></button>
-
+    <button type="button" *ngIf="!auth.isAuthenticated()" (click)="auth.login()">Login</button>  
+    <button type="button" *ngIf="auth.isAuthenticated()" (click)="auth.logout()">Logout</button>  
     <span title>Pikes Park</span>
 
     <button md-icon-button [md-menu-trigger-for]="menu">
