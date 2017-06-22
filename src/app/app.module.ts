@@ -10,21 +10,24 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
  */
 import { AppComponent } from './app.component';
 import { GooglemapComponent } from './pikes-map/googlemap/googlemap.component'; // Import for first route rendering
+
 /**
  * Import modules
  */
 import { PikesMapModule } from './pikes-map/pikes-map.module';
 import { PikesUserModule } from './pikes-user/pikes-user.module';
 import { SettingsModule } from './settings/settings.module';
+import { CallbackModule } from './callback/callback.module';
 
 /**
-* Import servces
+* Import services
 */
 import { AgmCoreModule } from '@agm/core';
 import { ModuleWithProviders } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { HorizonService } from './horizon.service';
 import { PikesUserService } from './pikes-user/pikes-user.service';
+import { AuthService } from './auth/auth.service';
 
 @NgModule({
   declarations: [
@@ -40,6 +43,7 @@ import { PikesUserService } from './pikes-user/pikes-user.service';
     RouterModule,
     PikesUserModule,
     SettingsModule,
+    CallbackModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyBV7ayzYxxlxvXsosIpgnQVtpLPwiP80Mw'
     }),
@@ -50,7 +54,7 @@ import { PikesUserService } from './pikes-user/pikes-user.service';
       }
     ])
   ],
-  providers: [HorizonService, PikesUserService],
+  providers: [HorizonService, PikesUserService, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
