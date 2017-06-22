@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { HorizonService } from './horizon.service'
 
 @Component({
@@ -6,12 +6,14 @@ import { HorizonService } from './horizon.service'
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'app';
   table = this.horizon.table('menu');
   menus: Array<any> = [];
 
-  constructor(private horizon: HorizonService) {
+  constructor(private horizon: HorizonService) { }
+
+  ngOnInit() {
     this.table
       .order("order")
       .watch()
