@@ -68,6 +68,8 @@ export class GooglemapComponent implements OnInit {
 					});
 			  	}
 			
+
+				this.markers = data;
 			});
 	}
 
@@ -80,7 +82,10 @@ export class GooglemapComponent implements OnInit {
 	}
 
 
+<<<<<<< HEAD
 	
+=======
+>>>>>>> c0b9de66d6f803bf55a0c0c0a86172800eb1f848
 
 }
 

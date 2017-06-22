@@ -1,25 +1,24 @@
 <md-sidenav-container>
   <md-sidenav #sidenav class="sidenav" mode="over">
     <!-- sidenav content -->
-    <div *ngFor="let menu of menus">
-      <a routerLink="/{{menu.path}}" routerLinkActive="active" (click)="sidenav.close()">{{menu.name}}</a>
-    </div>
+    <md-nav-list>
+      <a class="menu-item" *ngFor="let menu of menus" routerLink="/{{menu.path}}" routerLinkActive="active" (click)="sidenav.close()">{{menu.name}}</a>
+    </md-nav-list>
   </md-sidenav>
 
   <!-- Toolbar -->
   <md-toolbar>
     <button class="menu-btn" type="button" md-icon-button (click)="sidenav.open()"><md-icon>menu</md-icon></button>
-    <button type="button" *ngIf="!auth.isAuthenticated()" (click)="auth.login()">Login</button>  
-    <button type="button" *ngIf="auth.isAuthenticated()" (click)="auth.logout()">Logout</button>  
-    <span title>Pikes Park</span>
+
+    <span title><a routerLink="">Pikes Park</a></span>
 
     <button md-icon-button [md-menu-trigger-for]="menu">
       <md-icon>more_vert</md-icon>
     </button>
   </md-toolbar>
   <md-menu x-position="before" #menu="mdMenu">
-    <button md-menu-item>Option 1</button>
-    <button md-menu-item>Option 2</button>
+    <button md-button *ngIf="!auth.isAuthenticated()" (click)="auth.login()">Login</button>
+    <button md-button *ngIf="auth.isAuthenticated()" (click)="auth.logout()">Logout</button>
   </md-menu>
 
   <!-- primary content -->
