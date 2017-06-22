@@ -19,9 +19,19 @@ export class GooglemapComponent implements OnInit {
 	zoom: number = 11;
 	markers: Array<any> = [];
 	subscription: Subscription;
-
+	userPosition: string = "";
 
 	constructor(private pikeMapService: PikesMapService) { }
+
+	location = {};
+
+	setPosition(position) {
+		this.location = position.coords;
+		this.userPosition = "&geofilter.distance=" + position.coords.latitude + "%2C" + position.coords.longitude + "%2C" + "500"
+		this.pikeMapService
+			.getParkLocation(this.userPosition)
+			.subscribe();
+	}
 
 	ngOnInit() {
 		this.subscription = this.pikeMapService.navItem$
@@ -33,13 +43,17 @@ export class GooglemapComponent implements OnInit {
 				}
 			});
 
-		this.pikeMapService
-			.getParkLocation()
-			.subscribe();
+		if (navigator.geolocation) {
+			navigator.geolocation.getCurrentPosition(this.setPosition.bind(this));
+		};
 	}
 
-	mapClicked($event: MouseEvent) {
+	clickFree(marker) {
+		marker.state = "free"
+	}
 
+	clickBusy(marker) {
+		marker.state = "busy"
 	}
 
 	ngOnDestroy() {

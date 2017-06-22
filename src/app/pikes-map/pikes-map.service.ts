@@ -17,8 +17,9 @@ export class PikesMapService {
 
   constructor(private http: Http, private horizon: HorizonService) { }
 
-  getParkLocation(): Observable<any> {
-    return this.http.get("https://opendata.paris.fr/api/records/1.0/search/?dataset=parcs-de-stationnement-concedes-de-la-ville-de-paris&facet=arrdt&facet=type_parc&facet=horaire_na&facet=autopart&facet=tarif_pr&facet=tarif_res")
+  getParkLocation(userPosition): Observable<any> {
+    // TO FIX : NO RESULT WITH THIS REQUEST CURRENT STATE
+    return this.http.get("https://opendata.paris.fr/api/records/1.0/search/?dataset=parcs-de-stationnement-concedes-de-la-ville-de-paris&facet=arrdt&facet=type_parc&facet=horaire_na&facet=autopart&facet=tarif_pr&facet=tarif_res" + userPosition)
       .map(this.handleData.bind(this))
       .catch(this.handleError);
   }
