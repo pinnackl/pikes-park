@@ -1,9 +1,29 @@
-<!--The whole content below can be removed with the new code.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{title}}!!
-  </h1>
-</div>
+<md-sidenav-container>
+  <md-sidenav #sidenav class="sidenav" mode="over">
+    <!-- sidenav content -->
+    <div *ngFor="let menu of menus">
+      {{menu.name}}
+    </div>
+  </md-sidenav>
+
+  <!-- Toolbar -->
+  <md-toolbar>
+    <button class="menu-btn" type="button" md-icon-button (click)="sidenav.open()"><md-icon>menu</md-icon></button>
+
+    <span title>Pikes Park</span>
+
+    <button md-icon-button [md-menu-trigger-for]="menu">
+      <md-icon>more_vert</md-icon>
+    </button>
+  </md-toolbar>
+  <md-menu x-position="before" #menu="mdMenu">
+    <button md-menu-item>Option 1</button>
+    <button md-menu-item>Option 2</button>
+  </md-menu>
+
+  <!-- primary content -->
+  <button class="main-fab" md-fab><md-icon>add</md-icon></button>
+</md-sidenav-container>
+
 
 <app-googlemap></app-googlemap>
-
