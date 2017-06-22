@@ -16,6 +16,11 @@
 }
 
 /* Global styles */
+md-toolbar {
+    position: relative;
+    z-index: 999;
+}
+
 .mat-toolbar,
 .mat-sidenav-container{
     background: transparent;
@@ -38,6 +43,7 @@ md-sidenav {
     position: fixed;
     bottom: 16px;
     right: 16px;
+    z-index: 999;
 }
 
 /* Desktop media queries */
