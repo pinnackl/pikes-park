@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 
 import { PikesMapService } from "../pikes-map.service"
 
+import { Subscription } from 'rxjs/Subscription';
+
 @Component({
 	selector: 'app-googlemap',
 	templateUrl: './googlemap.component.html',
@@ -16,22 +18,32 @@ export class GooglemapComponent implements OnInit {
 	lng: number = 2.333333;
 	zoom: number = 11;
 	markers: Array<any> = [];
+	subscription: Subscription;
+
 
 	constructor(private pikeMapService: PikesMapService) { }
 
 	ngOnInit() {
+		this.subscription = this.pikeMapService.navItem$
+			.subscribe(data => {
+				if (data != 0) {
+					data.forEach(element => {
+						this.markers.push(element);
+					});
+				}
+			});
+
 		this.pikeMapService
 			.getParkLocation()
-			.subscribe(data => {
-				this.markers = data;
-			});
+			.subscribe();
 	}
 
 	mapClicked($event: MouseEvent) {
 
 	}
 
-
-
+	ngOnDestroy() {
+		this.subscription.unsubscribe();
+	}
 }
 

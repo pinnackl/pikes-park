@@ -4,6 +4,7 @@ import { Observable } from 'rxjs/Observable';
 
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 import { HorizonService } from '../horizon.service';
 
@@ -11,6 +12,8 @@ import { HorizonService } from '../horizon.service';
 export class PikesMapService {
 
   table = this.horizon.table('parkLocations');
+  private _navItemSource = new BehaviorSubject<any>(0);
+  navItem$ = this._navItemSource.asObservable();
 
   constructor(private http: Http, private horizon: HorizonService) { }
 
@@ -20,20 +23,40 @@ export class PikesMapService {
       .catch(this.handleError);
   }
 
+  changeNav(number) {
+    this._navItemSource.next(number);
+  }
+
   private handleData(res: Response) {
     let body = res.json();
     let arrayLocations = [];
+    let arrayPromises = [];
+
     body.records.forEach(element => {
-      arrayLocations.push({
-        lat: element.geometry.coordinates[0],
-        long: element.geometry.coordinates[1],
-        state: "free"
-      })
+      let lat = element.geometry.coordinates[1];
+      let long = element.geometry.coordinates[0];
+      let state = "free";
+      arrayPromises.push(new Promise((resolve, reject) => {
+        this.table
+          .find({ id: lat + long })
+          .watch()
+          .subscribe(data => {
+            state = data === null ? state : data.state;
+            arrayLocations.push({
+              id: lat + long,
+              lat: lat,
+              long: long,
+              state: state
+            })
+            resolve(true);
+          });
+      }));
     });
 
-    this.table.store(arrayLocations);
-
-    return arrayLocations;
+    Promise.all(arrayPromises).then(values => {
+      this.table.store(arrayLocations);
+      this.changeNav(arrayLocations);
+    })
   }
 
   private handleError(error: Response | any) {
