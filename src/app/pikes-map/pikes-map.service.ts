@@ -17,7 +17,9 @@ export class PikesMapService {
   }
 
   private handleData(res: Response) {
-    return res;
+  	let body = res.json();
+
+    return body;
   }
 
   private handleError(error: Response | any) {
