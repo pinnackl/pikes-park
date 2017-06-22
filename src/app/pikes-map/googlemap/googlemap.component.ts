@@ -81,11 +81,5 @@ export class GooglemapComponent implements OnInit {
 	 	marker.state = "busy"
 	}
 
-
-<<<<<<< HEAD
-	
-=======
->>>>>>> c0b9de66d6f803bf55a0c0c0a86172800eb1f848
-
 }
 
