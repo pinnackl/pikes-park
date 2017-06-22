@@ -1,16 +1,16 @@
 <md-sidenav-container>
   <md-sidenav #sidenav class="sidenav" mode="over">
     <!-- sidenav content -->
-    <div *ngFor="let menu of menus">
-      <a routerLink="/{{menu.path}}" routerLinkActive="active" (click)="sidenav.close()">{{menu.name}}</a>
-    </div>
+    <md-nav-list>
+      <a class="menu-item" *ngFor="let menu of menus" routerLink="/{{menu.path}}" routerLinkActive="active" (click)="sidenav.close()">{{menu.name}}</a>
+    </md-nav-list>
   </md-sidenav>
 
   <!-- Toolbar -->
   <md-toolbar>
     <button class="menu-btn" type="button" md-icon-button (click)="sidenav.open()"><md-icon>menu</md-icon></button>
 
-    <span title>Pikes Park</span>
+    <span title><a routerLink="">Pikes Park</a></span>
 
     <button md-icon-button [md-menu-trigger-for]="menu">
       <md-icon>more_vert</md-icon>

@@ -19,12 +19,20 @@
 md-toolbar {
     position: relative;
     z-index: 999;
+    padding: 0 8px;
 }
 
 .mat-toolbar,
 .mat-sidenav-container{
+    color: #191919;
     background: transparent;
-    background-color: transparent;
+    background-color: rgba(255, 255, 255, 0.59);
+}
+
+.mat-toolbar a,
+.mat-sidenav-container a {
+    text-decoration: none;
+    color: inherit;
 }
 
 md-sidenav-container {
@@ -35,6 +43,17 @@ md-sidenav {
     padding: 20px;
     width: 250px;
     z-index: 999;
+}
+
+md-sidenav .menu-item {
+    display: block;
+    height: 3em;
+    line-height: 3em;
+}
+
+md-sidenav .menu-item.active {
+    color: #1e88e5;
+    font-weight: bold;
 }
 
 .main-fab {
