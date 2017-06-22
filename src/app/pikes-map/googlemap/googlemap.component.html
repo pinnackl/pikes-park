@@ -2,11 +2,11 @@
 		[zoom]="zoom" [disableDefaultUI]="false" 
 		[zoomControl]="false" 
 		[streetViewControl]="false"
-      (mapClick)="mapClicked($event)">
-  <agm-marker *ngFor="let m of markers" [latitude]="m.lat" [longitude]="m.lng">
-  		<agm-info-window>
-  			<button>Libre</button>
-  			<button>Occupé</button>
+      >
+  <agm-marker *ngFor="let m of markers" [latitude]="m.lat" [longitude]="m.lng" >
+  		<agm-info-window >
+  			<button (click)="clickFree(m)">Libre</button>
+  			<button (click)="clickBusy(m)">Occupé</button>
         </agm-info-window>
   </agm-marker>
 </agm-map>
