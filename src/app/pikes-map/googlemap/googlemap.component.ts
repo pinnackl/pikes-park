@@ -23,19 +23,7 @@ export class GooglemapComponent implements OnInit {
 		this.pikeMapService
 			.getParkLocation()
 			.subscribe(data => {
-				
-				for (var i = 0; i < data.records.length; i++) {
-			  		var resBis = data.records[i]
-			  		var lng = data.records[i].geometry.coordinates[0]
-			  		var lat = data.records[i].geometry.coordinates[1]
-			  		
-			  		this.markers.push({
-						lat: lat,
-						lng: lng,
-						state: "free"
-					});
-			  	}
-			
+				this.markers = data;
 			});
 	}
 
@@ -43,7 +31,7 @@ export class GooglemapComponent implements OnInit {
 
 	}
 
-	
+
 
 }
 
