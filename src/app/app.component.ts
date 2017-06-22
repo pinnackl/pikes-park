@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { HorizonService } from './horizon.service'
+import { HorizonService } from './horizon.service';
 
 @Component({
   selector: 'app-root',

@@ -9,9 +9,17 @@ import { AppComponent } from './app.component';
 import { GooglemapComponent } from './googlemap/googlemap.component';
 
 import { AgmCoreModule } from '@agm/core';
+import { ModuleWithProviders } from '@angular/core';
+import { RouterModule } from '@angular/router';
 
+// SERVICES
 import { HorizonService } from './horizon.service';
 import { PikesUserService } from './pikes-user/pikes-user.service';
+
+// MODULES
+import { PikesUserModule } from './pikes-user/pikes-user.module';
+
+import { PikesUserComponent } from './pikes-user/pikes-user/pikes-user.component';
 
 @NgModule({
   declarations: [
@@ -24,9 +32,17 @@ import { PikesUserService } from './pikes-user/pikes-user.service';
     HttpModule,
     MaterialModule,
     BrowserAnimationsModule,
+    RouterModule,
+    PikesUserModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyBV7ayzYxxlxvXsosIpgnQVtpLPwiP80Mw'
-    })
+    }),
+    RouterModule.forRoot([
+      {
+        path: '',
+        component: PikesUserComponent
+      }
+    ])
   ],
   providers: [HorizonService, PikesUserService],
   bootstrap: [AppComponent]
