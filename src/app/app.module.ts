@@ -13,12 +13,13 @@ import { GooglemapComponent } from './pikes-map/googlemap/googlemap.component'; 
 /**
  * Import modules
  */
-import { PikesMapModule} from './pikes-map/pikes-map.module';
+import { PikesMapModule } from './pikes-map/pikes-map.module';
 import { PikesUserModule } from './pikes-user/pikes-user.module';
+import { SettingsModule } from './settings/settings.module';
 
- /**
- * Import servces
- */
+/**
+* Import servces
+*/
 import { AgmCoreModule } from '@agm/core';
 import { ModuleWithProviders } from '@angular/core';
 import { RouterModule } from '@angular/router';
@@ -38,6 +39,7 @@ import { PikesUserService } from './pikes-user/pikes-user.service';
     PikesMapModule,
     RouterModule,
     PikesUserModule,
+    SettingsModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyBV7ayzYxxlxvXsosIpgnQVtpLPwiP80Mw'
     }),

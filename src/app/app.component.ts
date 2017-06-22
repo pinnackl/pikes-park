@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { HorizonService } from './horizon.service';
 
 @Component({
@@ -7,6 +7,7 @@ import { HorizonService } from './horizon.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
+  @ViewChild('sidenav') input: ElementRef;
   title = 'app';
   table = this.horizon.table('menu');
   menus: Array<any> = [];
@@ -20,5 +21,9 @@ export class AppComponent implements OnInit {
       .subscribe(data => {
         this.menus = data;
       });
+  }
+
+  closeSidenav() {
+    this.input.nativeElement.close();
   }
 }
