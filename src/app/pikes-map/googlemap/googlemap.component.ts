@@ -5,8 +5,6 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './googlemap.component.html',
   styleUrls: ['./googlemap.component.css']
 })
-
-
 export class GooglemapComponent implements OnInit {
 
   title: string = 'MAP';
