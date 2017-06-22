@@ -1,32 +1,34 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { MaterialModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+/**
+ * Import components
+ */
 import { AppComponent } from './app.component';
-import { GooglemapComponent } from './googlemap/googlemap.component';
-
-import { AgmCoreModule } from '@agm/core';
-import { ModuleWithProviders } from '@angular/core';
-import { RouterModule } from '@angular/router';
-
-// SERVICES
-import { HorizonService } from './horizon.service';
-import { PikesUserService } from './pikes-user/pikes-user.service';
-
-// MODULES
+import { GooglemapComponent } from './pikes-map/googlemap/googlemap.component'; // Import for first route rendering
+/**
+ * Import modules
+ */
+import { PikesMapModule } from './pikes-map/pikes-map.module';
 import { PikesUserModule } from './pikes-user/pikes-user.module';
 import { SettingsModule } from './settings/settings.module';
 
-// COMPONENTS
-import { PikesUserComponent } from './pikes-user/pikes-user/pikes-user.component';
+/**
+* Import servces
+*/
+import { AgmCoreModule } from '@agm/core';
+import { ModuleWithProviders } from '@angular/core';
+import { RouterModule } from '@angular/router';
+import { HorizonService } from './horizon.service';
+import { PikesUserService } from './pikes-user/pikes-user.service';
 
 @NgModule({
   declarations: [
     AppComponent,
-    GooglemapComponent
   ],
   imports: [
     BrowserModule,
@@ -34,6 +36,7 @@ import { PikesUserComponent } from './pikes-user/pikes-user/pikes-user.component
     HttpModule,
     MaterialModule,
     BrowserAnimationsModule,
+    PikesMapModule,
     RouterModule,
     PikesUserModule,
     SettingsModule,
@@ -43,7 +46,7 @@ import { PikesUserComponent } from './pikes-user/pikes-user/pikes-user.component
     RouterModule.forRoot([
       {
         path: '',
-        component: PikesUserComponent
+        component: GooglemapComponent
       }
     ])
   ],
