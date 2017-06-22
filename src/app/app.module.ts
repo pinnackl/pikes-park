@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
+import { HttpModule, JsonpModule } from '@angular/http';
 import { MaterialModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -28,6 +28,7 @@ import { RouterModule } from '@angular/router';
 import { HorizonService } from './horizon.service';
 import { PikesUserService } from './pikes-user/pikes-user.service';
 import { AuthService } from './auth/auth.service';
+import { PikesMapService } from "./pikes-map/pikes-map.service"
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { AuthService } from './auth/auth.service';
     BrowserModule,
     FormsModule,
     HttpModule,
+    JsonpModule,
     MaterialModule,
     BrowserAnimationsModule,
     PikesMapModule,
@@ -54,7 +56,7 @@ import { AuthService } from './auth/auth.service';
       }
     ])
   ],
-  providers: [HorizonService, PikesUserService, AuthService],
+  providers: [HorizonService, PikesUserService, PikesMapService, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
