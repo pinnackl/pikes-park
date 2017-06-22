@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import * as Horizon from '@horizon/client';
+import * as Horizon from 'horizon-client';
 
 @Injectable()
 export class HorizonService {
