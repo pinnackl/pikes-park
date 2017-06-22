@@ -2,7 +2,7 @@
   <md-sidenav #sidenav class="sidenav" mode="over">
     <!-- sidenav content -->
     <div *ngFor="let menu of menus">
-      <a routerLink="/{{menu.path}}" routerLinkActive="active">{{menu.name}}</a>
+      <a routerLink="/{{menu.path}}" routerLinkActive="active" (click)="closeSidenav()">{{menu.name}}</a>
     </div>
   </md-sidenav>
 

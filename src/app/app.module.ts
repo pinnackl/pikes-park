@@ -18,7 +18,9 @@ import { PikesUserService } from './pikes-user/pikes-user.service';
 
 // MODULES
 import { PikesUserModule } from './pikes-user/pikes-user.module';
+import { SettingsModule } from './settings/settings.module';
 
+// COMPONENTS
 import { PikesUserComponent } from './pikes-user/pikes-user/pikes-user.component';
 
 @NgModule({
@@ -34,6 +36,7 @@ import { PikesUserComponent } from './pikes-user/pikes-user/pikes-user.component
     BrowserAnimationsModule,
     RouterModule,
     PikesUserModule,
+    SettingsModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyBV7ayzYxxlxvXsosIpgnQVtpLPwiP80Mw'
     }),
