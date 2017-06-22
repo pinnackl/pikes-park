@@ -1,10 +1,15 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+import { PikesUserRoutingModule } from './pikes-user-routing.module';
+import { PikesUserComponent } from './pikes-user/pikes-user.component';
+
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule,
+    PikesUserRoutingModule
   ],
-  declarations: []
+  declarations: [PikesUserComponent]
 })
 export class PikesUserModule { }
+

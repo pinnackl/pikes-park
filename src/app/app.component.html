@@ -1,6 +1,9 @@
 <md-sidenav-container>
   <md-sidenav #sidenav class="sidenav" mode="over">
     <!-- sidenav content -->
+    <div *ngFor="let menu of menus">
+      <a routerLink="/{{menu.path}}" routerLinkActive="active">{{menu.name}}</a>
+    </div>
   </md-sidenav>
 
   <!-- Toolbar -->
@@ -19,6 +22,10 @@
   </md-menu>
 
   <!-- primary content -->
-  <app-googlemap></app-googlemap>
+  <router-outlet></router-outlet>
+
   <button class="main-fab" md-fab><md-icon>add</md-icon></button>
 </md-sidenav-container>
+
+
+<app-googlemap></app-googlemap>

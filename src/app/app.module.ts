@@ -9,15 +9,19 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
  * Import components
  */
 import { AppComponent } from './app.component';
-
+import { GooglemapComponent } from './pikes-map/googlemap/googlemap.component'; // Import for first route rendering
 /**
  * Import modules
  */
 import { PikesMapModule} from './pikes-map/pikes-map.module';
+import { PikesUserModule } from './pikes-user/pikes-user.module';
 
  /**
  * Import servces
  */
+import { AgmCoreModule } from '@agm/core';
+import { ModuleWithProviders } from '@angular/core';
+import { RouterModule } from '@angular/router';
 import { HorizonService } from './horizon.service';
 import { PikesUserService } from './pikes-user/pikes-user.service';
 
@@ -31,7 +35,18 @@ import { PikesUserService } from './pikes-user/pikes-user.service';
     HttpModule,
     MaterialModule,
     BrowserAnimationsModule,
-    PikesMapModule
+    PikesMapModule,
+    RouterModule,
+    PikesUserModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyBV7ayzYxxlxvXsosIpgnQVtpLPwiP80Mw'
+    }),
+    RouterModule.forRoot([
+      {
+        path: '',
+        component: GooglemapComponent
+      }
+    ])
   ],
   providers: [HorizonService, PikesUserService],
   bootstrap: [AppComponent]

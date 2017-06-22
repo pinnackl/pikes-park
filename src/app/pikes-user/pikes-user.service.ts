@@ -10,7 +10,7 @@ export class PikesUserService {
 
   constructor(private horizon: HorizonService) { }
 
-  getUser(key: string, value: string): any {
+  getUser(key: string, value: string): Object {
     let query = {};
     query[key] = value;
     return new Promise((resolve, reject) => {
@@ -19,6 +19,23 @@ export class PikesUserService {
         .watch()
         .subscribe(data => {
           resolve(data);
+        });
+    });
+  }
+
+  setUser(info: any): Object {
+    return new Promise((resolve, reject) => {
+      this.table
+        .store({
+          id: info.email,
+          username: info.username
+        })
+        .subscribe(
+        data => {
+          resolve(data)
+        },
+        err => {
+          reject(err);
         });
     });
   }
