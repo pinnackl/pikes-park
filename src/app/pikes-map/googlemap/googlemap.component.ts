@@ -58,16 +58,18 @@ export class GooglemapComponent implements OnInit {
 		setTimeout(function () {
 			tmpthis.makeRequest();
 			tmpthis.loopRequest();
-		}, 5000);
+		}, 50000);
 	}
 
 	clickFree(marker) {
-		marker.state = "free"
+		marker.state = "free";
+		marker.iconUrl = "marker-free.svg";
 		this.pikeMapService.changeState(marker);
 	}
 
 	clickBusy(marker) {
-		marker.state = "busy"
+		marker.state = "busy";
+		marker.iconUrl = "marker-busy.svg";
 		this.pikeMapService.changeState(marker);
 	}
 
