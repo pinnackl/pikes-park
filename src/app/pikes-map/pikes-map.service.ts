@@ -41,7 +41,7 @@ export class PikesMapService {
       let lat = element.geometry.coordinates[1];
       let long = element.geometry.coordinates[0];
       let state = "free";
-      let iconUrl = "marker-free.svg";
+      let iconUrl = "../../../assets/icones/marker-free.svg";
       arrayPromises.push(new Promise((resolve, reject) => {
         this.table
           .find({ id: lat + long })
