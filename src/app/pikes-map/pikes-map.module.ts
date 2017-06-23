@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { AuthService } from './../auth/auth.service';
+
 
 /**
  * Import components
@@ -17,13 +19,14 @@ import { AgmCoreModule } from '@agm/core';
     AgmCoreModule.forRoot()
   ],
   declarations: [
-  	GooglemapComponent
+    GooglemapComponent
   ],
   exports: [
-  	GooglemapComponent
+    GooglemapComponent
   ],
+  providers: [AuthService],
   bootstrap: [
-  	GooglemapComponent
+    GooglemapComponent
   ]
 })
 export class PikesMapModule { }

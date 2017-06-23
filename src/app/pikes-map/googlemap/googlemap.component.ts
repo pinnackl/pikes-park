@@ -4,6 +4,8 @@ import { PikesMapService } from "../pikes-map.service"
 
 import { Subscription } from 'rxjs/Subscription';
 
+import { AuthService } from '../../auth/auth.service';
+
 @Component({
 	selector: 'app-googlemap',
 	templateUrl: './googlemap.component.html',
@@ -21,18 +23,18 @@ export class GooglemapComponent implements OnInit {
 	subscription: Subscription;
 	userPosition: string = "";
 
-	constructor(private pikeMapService: PikesMapService) { }
+	constructor(private pikeMapService: PikesMapService, public auth: AuthService) { }
 
 	location = {};
 
 	setPosition(position) {
 		this.location = position.coords;
 		this.markers.push({
-			 id: position.coords.latitude + position.coords.longitude,
-             lat: position.coords.latitude,
-             long: position.coords.longitude,
-             state: "",
-             iconUrl: "../../../assets/icones/marker-user.svg"
+			id: position.coords.latitude + position.coords.longitude,
+			lat: position.coords.latitude,
+			long: position.coords.longitude,
+			state: "",
+			iconUrl: "../../../assets/icones/marker-user.svg"
 		});
 		//this.userPosition = "&geofilter.distance=" + position.coords.latitude + "%2C" + position.coords.longitude + "%2C" + "1000"
 		this.userPosition = "";
