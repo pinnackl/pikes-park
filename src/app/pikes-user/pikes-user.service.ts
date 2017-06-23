@@ -26,7 +26,7 @@ export class PikesUserService {
   setUser(info: any): Object {
     return new Promise((resolve, reject) => {
       this.table
-        .store({
+        .upsert({
           id: info.nickname,
           username: info.name,
           avatar: info.picture
@@ -45,7 +45,7 @@ export class PikesUserService {
     let nickname = localStorage.getItem('nickname');
     this.getUser('id', nickname).then(data => {
       let points = data.points != "null" && typeof data.points != "undefined" ? data.points + 1 : 0;
-      this.table.store({ id: nickname, points: points });
+      this.table.update({ id: nickname, points: points });
     });
   }
 
