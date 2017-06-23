@@ -27,6 +27,13 @@ export class GooglemapComponent implements OnInit {
 
 	setPosition(position) {
 		this.location = position.coords;
+		this.markers.push({
+			 id: position.coords.latitude + position.coords.longitude,
+             lat: position.coords.latitude,
+             long: position.coords.longitude,
+             state: "",
+             iconUrl: "../../../assets/icones/marker-user.svg"
+		});
 		//this.userPosition = "&geofilter.distance=" + position.coords.latitude + "%2C" + position.coords.longitude + "%2C" + "1000"
 		this.userPosition = "";
 		this.pikeMapService
@@ -58,16 +65,18 @@ export class GooglemapComponent implements OnInit {
 		setTimeout(function () {
 			tmpthis.makeRequest();
 			tmpthis.loopRequest();
-		}, 5000);
+		}, 50000);
 	}
 
 	clickFree(marker) {
-		marker.state = "free"
+		marker.state = "free";
+		marker.iconUrl = "../../../assets/icones/marker-free.svg";
 		this.pikeMapService.changeState(marker);
 	}
 
 	clickBusy(marker) {
-		marker.state = "busy"
+		marker.state = "busy";
+		marker.iconUrl = "../../../assets/icones/marker-busy.svg";
 		this.pikeMapService.changeState(marker);
 	}
 
