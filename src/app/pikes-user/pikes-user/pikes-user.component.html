@@ -1,3 +1,9 @@
+<h3>Profile</h3>
+
 <p>
-  pikes-user works!
+  <img src="{{profile?.picture}}" class="avatar" alt="avatar">
 </p>
+
+<p>Nickname : {{ profile?.nickname }}</p>
+
+<pre class="full-profile">{{ profile | json }}</pre>
