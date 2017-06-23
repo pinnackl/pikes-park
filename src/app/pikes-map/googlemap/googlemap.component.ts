@@ -43,15 +43,21 @@ export class GooglemapComponent implements OnInit {
 					});
 				}
 			});
-		this.getGeoloc();
+		this.makeRequest();
+		this.loopRequest();
 	}
 
-	getGeoloc() {
+	makeRequest() {
+		if (navigator.geolocation) {
+			navigator.geolocation.getCurrentPosition(this.setPosition.bind(this));
+		};
+	}
+
+	loopRequest() {
 		let tmpthis = this;
 		setTimeout(function () {
-			if (navigator.geolocation) {
-				navigator.geolocation.getCurrentPosition(tmpthis.setPosition.bind(tmpthis));
-			};
+			tmpthis.makeRequest();
+			tmpthis.loopRequest();
 		}, 5000);
 	}
 
