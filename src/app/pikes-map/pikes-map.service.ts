@@ -48,7 +48,7 @@ export class PikesMapService {
           .watch()
           .subscribe(data => {
             state = data === null ? state : data.state;
-            iconUrl = state === "free" ? "marker-free.svg" : "marker-busy.svg";
+            iconUrl = state === "free" ? "../../../assets/icones/marker-free.svg" : "../../../assets/icones/marker-busy.svg";
             arrayLocations.push({
               id: lat + long,
               lat: lat,
