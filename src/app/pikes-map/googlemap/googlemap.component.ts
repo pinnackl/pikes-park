@@ -63,13 +63,13 @@ export class GooglemapComponent implements OnInit {
 
 	clickFree(marker) {
 		marker.state = "free";
-		marker.iconUrl = "marker-free.svg";
+		marker.iconUrl = "../../../assets/icones/marker-free.svg";
 		this.pikeMapService.changeState(marker);
 	}
 
 	clickBusy(marker) {
 		marker.state = "busy";
-		marker.iconUrl = "marker-busy.svg";
+		marker.iconUrl = "../../../assets/icones/marker-busy.svg";
 		this.pikeMapService.changeState(marker);
 	}
 
