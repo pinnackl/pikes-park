@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from './../../auth/auth.service';
 
 @Component({
   selector: 'app-pikes-user',
@@ -7,10 +8,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PikesUserComponent implements OnInit {
 
-  constructor() { }
+  profile: any;
+
+  constructor(public auth: AuthService) { }
 
   ngOnInit() {
-    console.log("pikes user");
+    if (this.auth.userProfile) {
+      this.profile = this.auth.userProfile;
+    } else {
+      this.auth.getProfile((err, profile) => {
+        this.profile = profile;
+      });
+    }
   }
 
 }
