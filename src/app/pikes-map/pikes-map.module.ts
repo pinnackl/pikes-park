@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { MaterialModule } from '@angular/material';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 /**
  * Import components
@@ -14,6 +16,8 @@ import { AgmCoreModule } from '@agm/core';
 @NgModule({
   imports: [
     CommonModule,
+    MaterialModule,
+    BrowserAnimationsModule,
     AgmCoreModule.forRoot()
   ],
   declarations: [

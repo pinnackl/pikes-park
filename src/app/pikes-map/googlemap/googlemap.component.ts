@@ -83,6 +83,12 @@ export class GooglemapComponent implements OnInit {
 		this.pikeUserService.addPoint();
 	}
 
+	clickCenter(e) {
+		// this.lat = 
+		// this.lng = 
+		// this.zoom = 
+	}
+
 	ngOnDestroy() {
 		this.subscription.unsubscribe();
 	}

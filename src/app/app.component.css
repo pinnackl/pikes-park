@@ -56,14 +56,6 @@ md-sidenav .menu-item.active {
     font-weight: bold;
 }
 
-.main-fab {
-    background-color: #1e88e5;
-    position: fixed;
-    bottom: 16px;
-    right: 16px;
-    z-index: 999;
-}
-
 /* Desktop media queries */
 @media (min-width: 700px) {
     md-sidenav {
