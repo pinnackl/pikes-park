@@ -43,20 +43,30 @@ export class GooglemapComponent implements OnInit {
 					});
 				}
 			});
+		this.makeRequest();
+		this.loopRequest();
+	}
 
+	makeRequest() {
 		if (navigator.geolocation) {
 			navigator.geolocation.getCurrentPosition(this.setPosition.bind(this));
 		};
 	}
 
+	loopRequest() {
+		let tmpthis = this;
+		setTimeout(function () {
+			tmpthis.makeRequest();
+			tmpthis.loopRequest();
+		}, 5000);
+	}
+
 	clickFree(marker) {
-		console.log(marker);
 		marker.state = "free"
 		this.pikeMapService.changeState(marker);
 	}
 
 	clickBusy(marker) {
-		console.log(marker);
 		marker.state = "busy"
 		this.pikeMapService.changeState(marker);
 	}

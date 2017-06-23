@@ -8,8 +8,17 @@ import Auth0Lock from 'auth0-lock';
 export class AuthService {
 
     lock = new Auth0Lock(AUTH_CONFIG.clientID, AUTH_CONFIG.domain, {
+        allowedConnections: ["google-oauth2"],
         oidcConformant: true,
         autoclose: true,
+        language: 'fr',
+        theme: {
+            logo: '../../assets/logo.svg',
+            primaryColor: '#1E88E5'
+        },
+        languageDictionary: {
+            title: "Pikes Park"
+        },
         auth: {
             redirectUrl: AUTH_CONFIG.callbackURL,
             responseType: 'token id_token',
@@ -73,6 +82,12 @@ export class AuthService {
         localStorage.setItem('id_token', authResult.idToken);
         localStorage.setItem('expires_at', expiresAt);
 
+        this.lock.getUserInfo(authResult.accessToken, (err, profile) => {
+            if (profile) {
+                localStorage.setItem('nickname', profile.nickname);
+            }
+        });
+
     }
 
     public logout(): void {
@@ -80,6 +95,7 @@ export class AuthService {
         localStorage.removeItem('access_token');
         localStorage.removeItem('id_token');
         localStorage.removeItem('expires_at');
+        localStorage.removeItem('nickname');
         // Go back to the home route
         this.router.navigate(['/']);
     }
