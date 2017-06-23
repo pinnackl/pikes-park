@@ -8,7 +8,7 @@
 
   <!-- Toolbar -->
   <md-toolbar>
-    <button class="menu-btn" type="button" md-icon-button (click)="sidenav.open()"><md-icon>menu</md-icon></button>
+    <button class="menu-btn" type="button" md-icon-button (click)="sidenav.open()"><md-icon>Menu</md-icon></button>
 
     <span title><a routerLink="">Pikes Park</a></span>
 
@@ -17,10 +17,15 @@
     </button>
   </md-toolbar>
   <md-menu x-position="before" #menu="mdMenu">
-    <button md-button *ngIf="!auth.isAuthenticated()" (click)="auth.login()">Login</button>
-    <button md-button *ngIf="auth.isAuthenticated()" (click)="auth.logout()">Logout</button>
+    <button md-button *ngIf="!auth.isAuthenticated()" (click)="auth.login()">Connexion</button>
+    <button md-button *ngIf="auth.isAuthenticated()" (click)="auth.logout()">Déconnexion</button>
   </md-menu>
 
   <!-- primary content -->
   <router-outlet></router-outlet>
+<<<<<<< HEAD
+=======
+
+  <button class="main-fab" md-fab><md-icon>Ajouter</md-icon></button>
+>>>>>>> 0b78a31f1830cb73a3cae8b13ee1505243a1e474
 </md-sidenav-container>
