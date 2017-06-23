@@ -10,7 +10,7 @@ export class PikesUserService {
 
   constructor(private horizon: HorizonService) { }
 
-  getUser(key: string, value: string): Object {
+  getUser(key: string, value: string): any {
     let query = {};
     query[key] = value;
     return new Promise((resolve, reject) => {
@@ -38,6 +38,14 @@ export class PikesUserService {
         err => {
           reject(err);
         });
+    });
+  }
+
+  addPoint() {
+    let nickname = localStorage.getItem('nickname');
+    this.getUser('id', nickname).then(data => {
+      let points = data.points != "null" && typeof data.points != "undefined" ? data.points + 1 : 0;
+      this.table.store({ id: nickname, points: points });
     });
   }
 
