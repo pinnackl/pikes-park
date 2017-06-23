@@ -17,7 +17,7 @@ export class AuthService {
             primaryColor: '#1E88E5'
         },
         languageDictionary: {
-            title: "Pikes Park"
+            title: "Authentification"
         },
         auth: {
             redirectUrl: AUTH_CONFIG.callbackURL,
