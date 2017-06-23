@@ -1,11 +1,9 @@
-<h3>Profile</h3>
+<h3 class="profile">Profile</h3>
 
 <p>
-  <img src="{{profile?.picture}}" class="avatar" alt="avatar">
+  <img class="avatar" src="{{profile?.picture}}" class="avatar" alt="avatar">
 </p>
 
-<p>Nickname : {{ profile?.nickname }}</p>
+<p>{{ profile?.name }}</p>
 
-<p>Number of points : {{points}}</p>
-
-<pre class="full-profile">{{ profile | json }}</pre>
+<p>Points : {{points}}</p>
