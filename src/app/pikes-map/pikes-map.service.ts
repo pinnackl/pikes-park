@@ -28,6 +28,10 @@ export class PikesMapService {
     this._navItemSource.next(number);
   }
 
+  changeState(marker: any) {
+    this.table.store(marker);
+  }
+
   private handleData(res: Response) {
     let body = res.json();
     let arrayLocations = [];

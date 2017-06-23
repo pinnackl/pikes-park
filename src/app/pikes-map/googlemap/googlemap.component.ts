@@ -27,7 +27,8 @@ export class GooglemapComponent implements OnInit {
 
 	setPosition(position) {
 		this.location = position.coords;
-		this.userPosition = "&geofilter.distance=" + position.coords.latitude + "%2C" + position.coords.longitude + "%2C" + "500"
+		//this.userPosition = "&geofilter.distance=" + position.coords.latitude + "%2C" + position.coords.longitude + "%2C" + "1000"
+		this.userPosition = "";
 		this.pikeMapService
 			.getParkLocation(this.userPosition)
 			.subscribe();
@@ -49,11 +50,15 @@ export class GooglemapComponent implements OnInit {
 	}
 
 	clickFree(marker) {
+		console.log(marker);
 		marker.state = "free"
+		this.pikeMapService.changeState(marker);
 	}
 
 	clickBusy(marker) {
+		console.log(marker);
 		marker.state = "busy"
+		this.pikeMapService.changeState(marker);
 	}
 
 	ngOnDestroy() {
