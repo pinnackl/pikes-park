@@ -43,20 +43,24 @@ export class GooglemapComponent implements OnInit {
 					});
 				}
 			});
+		this.getGeoloc();
+	}
 
-		if (navigator.geolocation) {
-			navigator.geolocation.getCurrentPosition(this.setPosition.bind(this));
-		};
+	getGeoloc() {
+		let tmpthis = this;
+		setTimeout(function () {
+			if (navigator.geolocation) {
+				navigator.geolocation.getCurrentPosition(tmpthis.setPosition.bind(tmpthis));
+			};
+		}, 5000);
 	}
 
 	clickFree(marker) {
-		console.log(marker);
 		marker.state = "free"
 		this.pikeMapService.changeState(marker);
 	}
 
 	clickBusy(marker) {
-		console.log(marker);
 		marker.state = "busy"
 		this.pikeMapService.changeState(marker);
 	}

@@ -27,8 +27,9 @@ export class PikesUserService {
     return new Promise((resolve, reject) => {
       this.table
         .store({
-          id: info.email,
-          username: info.username
+          id: info.nickname,
+          username: info.name,
+          avatar: info.picture
         })
         .subscribe(
         data => {
