@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 
 import { PikesMapService } from "../pikes-map.service"
 
+import { Subscription } from 'rxjs/Subscription';
+
 @Component({
 	selector: 'app-googlemap',
 	templateUrl: './googlemap.component.html',
@@ -16,34 +18,46 @@ export class GooglemapComponent implements OnInit {
 	lng: number = 2.333333;
 	zoom: number = 11;
 	markers: Array<any> = [];
+	subscription: Subscription;
+	userPosition: string = "";
 
 	constructor(private pikeMapService: PikesMapService) { }
 
-	ngOnInit() {
+	location = {};
+
+	setPosition(position) {
+		this.location = position.coords;
+		this.userPosition = "&geofilter.distance=" + position.coords.latitude + "%2C" + position.coords.longitude + "%2C" + "500"
 		this.pikeMapService
-			.getParkLocation()
+			.getParkLocation(this.userPosition)
+			.subscribe();
+	}
+
+	ngOnInit() {
+		this.subscription = this.pikeMapService.navItem$
 			.subscribe(data => {
-				
-				for (var i = 0; i < data.records.length; i++) {
-			  		var resBis = data.records[i]
-			  		var lng = data.records[i].geometry.coordinates[0]
-			  		var lat = data.records[i].geometry.coordinates[1]
-			  		
-			  		this.markers.push({
-						lat: lat,
-						lng: lng,
-						state: "free"
+				if (data != 0) {
+					data.forEach(element => {
+						this.markers.push(element);
 					});
-			  	}
-			
+				}
 			});
+
+		if (navigator.geolocation) {
+			navigator.geolocation.getCurrentPosition(this.setPosition.bind(this));
+		};
 	}
 
-	mapClicked($event: MouseEvent) {
-
+	clickFree(marker) {
+		marker.state = "free"
 	}
 
-	
+	clickBusy(marker) {
+		marker.state = "busy"
+	}
 
+	ngOnDestroy() {
+		this.subscription.unsubscribe();
+	}
 }
 

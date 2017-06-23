@@ -1,25 +1,63 @@
 import { Injectable } from '@angular/core';
-
 import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
+
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+
+import { HorizonService } from '../horizon.service';
 
 @Injectable()
 export class PikesMapService {
 
-  constructor(private http: Http) { }
+  table = this.horizon.table('parkLocations');
+  private _navItemSource = new BehaviorSubject<any>(0);
+  navItem$ = this._navItemSource.asObservable();
 
-  getParkLocation(): Observable<any> {
-    return this.http.get("https://opendata.paris.fr/api/records/1.0/search/?dataset=parcs-de-stationnement-concedes-de-la-ville-de-paris&facet=arrdt&facet=type_parc&facet=horaire_na&facet=autopart&facet=tarif_pr&facet=tarif_res")
-      .map(this.handleData)
+  constructor(private http: Http, private horizon: HorizonService) { }
+
+  getParkLocation(userPosition): Observable<any> {
+    // TO FIX : NO RESULT WITH THIS REQUEST CURRENT STATE
+    return this.http.get("https://opendata.paris.fr/api/records/1.0/search/?dataset=parcs-de-stationnement-concedes-de-la-ville-de-paris&facet=arrdt&facet=type_parc&facet=horaire_na&facet=autopart&facet=tarif_pr&facet=tarif_res" + userPosition)
+      .map(this.handleData.bind(this))
       .catch(this.handleError);
   }
 
-  private handleData(res: Response) {
-  	let body = res.json();
+  changeNav(number) {
+    this._navItemSource.next(number);
+  }
 
-    return body;
+  private handleData(res: Response) {
+    let body = res.json();
+    let arrayLocations = [];
+    let arrayPromises = [];
+
+    body.records.forEach(element => {
+      let lat = element.geometry.coordinates[1];
+      let long = element.geometry.coordinates[0];
+      let state = "free";
+      arrayPromises.push(new Promise((resolve, reject) => {
+        this.table
+          .find({ id: lat + long })
+          .watch()
+          .subscribe(data => {
+            state = data === null ? state : data.state;
+            arrayLocations.push({
+              id: lat + long,
+              lat: lat,
+              long: long,
+              state: state
+            })
+            resolve(true);
+          });
+      }));
+    });
+
+    Promise.all(arrayPromises).then(values => {
+      this.table.store(arrayLocations);
+      this.changeNav(arrayLocations);
+    })
   }
 
   private handleError(error: Response | any) {
