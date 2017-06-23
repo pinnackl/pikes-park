@@ -28,6 +28,13 @@ export class GooglemapComponent implements OnInit {
 
 	setPosition(position) {
 		this.location = position.coords;
+		this.markers.push({
+			 id: position.coords.latitude + position.coords.longitude,
+             lat: position.coords.latitude,
+             long: position.coords.longitude,
+             state: "",
+             iconUrl: "../../../assets/icones/marker-user.svg"
+		});
 		//this.userPosition = "&geofilter.distance=" + position.coords.latitude + "%2C" + position.coords.longitude + "%2C" + "1000"
 		this.userPosition = "";
 		this.pikeMapService
@@ -64,14 +71,14 @@ export class GooglemapComponent implements OnInit {
 
 	clickFree(marker) {
 		marker.state = "free";
-		marker.iconUrl = "marker-free.svg";
+		marker.iconUrl = "../../../assets/icones/marker-free.svg";
 		this.pikeMapService.changeState(marker);
 		this.pikeUserService.addPoint();
 	}
 
 	clickBusy(marker) {
 		marker.state = "busy";
-		marker.iconUrl = "marker-busy.svg";
+		marker.iconUrl = "../../../assets/icones/marker-busy.svg";
 		this.pikeMapService.changeState(marker);
 		this.pikeUserService.addPoint();
 	}

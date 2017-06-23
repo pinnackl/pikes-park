@@ -41,14 +41,14 @@ export class PikesMapService {
       let lat = element.geometry.coordinates[1];
       let long = element.geometry.coordinates[0];
       let state = "free";
-      let iconUrl = "marker-free.svg";
+      let iconUrl = "../../../assets/icones/marker-free.svg";
       arrayPromises.push(new Promise((resolve, reject) => {
         this.table
           .find({ id: lat + long })
           .watch()
           .subscribe(data => {
             state = data === null ? state : data.state;
-            iconUrl = state === "free" ? "marker-free.svg" : "marker-busy.svg";
+            iconUrl = state === "free" ? "../../../assets/icones/marker-free.svg" : "../../../assets/icones/marker-busy.svg";
             arrayLocations.push({
               id: lat + long,
               lat: lat,
