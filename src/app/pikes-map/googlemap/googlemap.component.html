@@ -3,10 +3,10 @@
 		<agm-info-window>
 			<div *ngIf="auth.isAuthenticated(); else loginBlock">
 				<button md-button *ngIf="m.state == 'busy'" (click)="clickFree(m)">Libre</button>
-				<button md-button *ngIf="m.state == 'free'" (click)="clickBusy(m)">Occupé</button>
+				<button md-button *ngIf="m.state == 'free'" (click)="clickBusy(m)">Occupée</button>
 			</div>
 			<ng-template #loginBlock>
-				<button md-button (click)="auth.login()">Login</button>
+				<button md-button (click)="auth.login()">Se Connecter</button>
 			</ng-template>
 		</agm-info-window>
 	</agm-marker>
