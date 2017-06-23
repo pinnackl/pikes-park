@@ -1,14 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 
-import { PikesMapService } from "../pikes-map.service"
+import { PikesMapService } from "../pikes-map.service";
+import { PikesUserService } from "../../pikes-user/pikes-user.service";
 
 import { Subscription } from 'rxjs/Subscription';
+
+import { AuthService } from '../../auth/auth.service';
 
 @Component({
 	selector: 'app-googlemap',
 	templateUrl: './googlemap.component.html',
 	styleUrls: ['./googlemap.component.css'],
-	providers: [PikesMapService]
+	providers: [PikesMapService, PikesUserService]
 })
 
 export class GooglemapComponent implements OnInit {
@@ -21,18 +24,18 @@ export class GooglemapComponent implements OnInit {
 	subscription: Subscription;
 	userPosition: string = "";
 
-	constructor(private pikeMapService: PikesMapService) { }
+	constructor(private pikeMapService: PikesMapService, private pikeUserService: PikesUserService, public auth: AuthService) { }
 
 	location = {};
 
 	setPosition(position) {
 		this.location = position.coords;
 		this.markers.push({
-			 id: position.coords.latitude + position.coords.longitude,
-             lat: position.coords.latitude,
-             long: position.coords.longitude,
-             state: "",
-             iconUrl: "../../../assets/icones/marker-user.svg"
+			id: position.coords.latitude + position.coords.longitude,
+			lat: position.coords.latitude,
+			long: position.coords.longitude,
+			state: "",
+			iconUrl: "../../../assets/icones/marker-user.svg"
 		});
 
 		this.zoom = 18;
@@ -76,12 +79,14 @@ export class GooglemapComponent implements OnInit {
 		marker.state = "free";
 		marker.iconUrl = "../../../assets/icones/marker-free.svg";
 		this.pikeMapService.changeState(marker);
+		this.pikeUserService.addPoint();
 	}
 
 	clickBusy(marker) {
 		marker.state = "busy";
 		marker.iconUrl = "../../../assets/icones/marker-busy.svg";
 		this.pikeMapService.changeState(marker);
+		this.pikeUserService.addPoint();
 	}
 
 	ngOnDestroy() {
