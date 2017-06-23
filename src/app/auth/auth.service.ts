@@ -98,7 +98,7 @@ export class AuthService {
         }
 
         const self = this;
-        this.lock.client.userInfo(accessToken, (err, profile) => {
+        this.lock.getUserInfo(accessToken, (err, profile) => {
             if (profile) {
                 self.userProfile = profile;
             }
