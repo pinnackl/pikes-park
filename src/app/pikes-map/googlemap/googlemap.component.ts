@@ -105,13 +105,8 @@ export class GooglemapComponent implements OnInit {
 		this.pikeUserService.addPoint();
 	}
 
-	clickCenter(e) {
-		var userObject = this.search("user", this.markers);
-		if (userObject) {
-			this.lat = userObject.lat;
-			this.lng = userObject.long;
-			this.zoom = 18;
-		}
+	clickCenter() {
+		this.makeRequest();
 	}
 
 	ngOnDestroy() {
