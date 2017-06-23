@@ -27,8 +27,14 @@ import { ModuleWithProviders } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { HorizonService } from './horizon.service';
 import { PikesUserService } from './pikes-user/pikes-user.service';
-import { AuthService } from './auth/auth.service';
 import { PikesMapService } from "./pikes-map/pikes-map.service"
+
+/**
+ * Import Authentication
+ */
+import { AuthService } from './auth/auth.service';
+import { AuthGuard } from './auth/auth.guard';
+
 
 @NgModule({
   declarations: [
@@ -56,7 +62,7 @@ import { PikesMapService } from "./pikes-map/pikes-map.service"
       }
     ])
   ],
-  providers: [HorizonService, PikesUserService, PikesMapService, AuthService],
+  providers: [HorizonService, PikesUserService, PikesMapService, AuthService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
