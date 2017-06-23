@@ -8,8 +8,17 @@ import Auth0Lock from 'auth0-lock';
 export class AuthService {
 
     lock = new Auth0Lock(AUTH_CONFIG.clientID, AUTH_CONFIG.domain, {
+        allowedConnections: ["google-oauth2"],
         oidcConformant: true,
         autoclose: true,
+        language: 'fr',
+        theme: {
+            logo: '../../assets/logo.svg',
+            primaryColor: '#1E88E5'
+        },
+        languageDictionary: {
+            title: "Pikes Park"
+        },
         auth: {
             redirectUrl: AUTH_CONFIG.callbackURL,
             responseType: 'token id_token',
