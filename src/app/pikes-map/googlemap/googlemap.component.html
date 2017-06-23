@@ -2,8 +2,8 @@
 	<agm-marker *ngFor="let m of markers" [latitude]="m.lat" [longitude]="m.long" [iconUrl]="m.iconUrl">
 		<agm-info-window>
 			<div *ngIf="auth.isAuthenticated(); else loginBlock">
-				<button md-button class="free-btn" (click)="clickFree(m)"><md-icon>add_location</md-icon>Libre</button>
-				<button md-button class="busy-btn" (click)="clickBusy(m)"><md-icon>directions_car</md-icon>Occupé</button>
+				<button md-button class="free-btn" *ngIf="m.state == 'busy'" (click)="clickFree(m)">Libre</button>
+				<button md-button class="busy-btn" *ngIf="m.state == 'free'" (click)="clickBusy(m)">Occupé</button>
 			</div>
 			<ng-template #loginBlock>
 				<button md-button class="auth-btn" (click)="auth.login()">Login</button>
