@@ -106,9 +106,12 @@ export class GooglemapComponent implements OnInit {
 	}
 
 	clickCenter(e) {
-		// this.lat = 
-		// this.lng = 
-		// this.zoom = 
+		var userObject = this.search("user", this.markers);
+		if (userObject) {
+			this.lat = userObject.lat;
+			this.lng = userObject.long;
+			this.zoom = 18;
+		}
 	}
 
 	ngOnDestroy() {
