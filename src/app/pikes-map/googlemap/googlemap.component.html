@@ -1,8 +1,8 @@
 <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" [disableDefaultUI]="false" [zoomControl]="false" [streetViewControl]="false">
-	<agm-marker *ngFor="let m of markers" [latitude]="m.lat" [longitude]="m.long">
+	<agm-marker *ngFor="let m of markers" [latitude]="m.lat" [longitude]="m.long" [iconUrl]="m.iconUrl">
 		<agm-info-window>
-			<button (click)="clickFree(m)">Libre</button>
-			<button (click)="clickBusy(m)">Occupé</button>
+			<button md-button (click)="clickFree(m)">Libre</button>
+			<button md-button (click)="clickBusy(m)">Occupé</button>
 		</agm-info-window>
 	</agm-marker>
 </agm-map>

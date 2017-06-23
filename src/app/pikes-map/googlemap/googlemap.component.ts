@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
-import { PikesMapService } from "../pikes-map.service"
+import { PikesMapService } from "../pikes-map.service";
+import { PikesUserService } from "../../pikes-user/pikes-user.service";
 
 import { Subscription } from 'rxjs/Subscription';
 
@@ -8,7 +9,7 @@ import { Subscription } from 'rxjs/Subscription';
 	selector: 'app-googlemap',
 	templateUrl: './googlemap.component.html',
 	styleUrls: ['./googlemap.component.css'],
-	providers: [PikesMapService]
+	providers: [PikesMapService, PikesUserService]
 })
 
 export class GooglemapComponent implements OnInit {
@@ -21,12 +22,19 @@ export class GooglemapComponent implements OnInit {
 	subscription: Subscription;
 	userPosition: string = "";
 
-	constructor(private pikeMapService: PikesMapService) { }
+	constructor(private pikeMapService: PikesMapService, private pikeUserService: PikesUserService) { }
 
 	location = {};
 
 	setPosition(position) {
 		this.location = position.coords;
+		this.markers.push({
+			 id: position.coords.latitude + position.coords.longitude,
+             lat: position.coords.latitude,
+             long: position.coords.longitude,
+             state: "",
+             iconUrl: "../../../assets/icones/marker-user.svg"
+		});
 		//this.userPosition = "&geofilter.distance=" + position.coords.latitude + "%2C" + position.coords.longitude + "%2C" + "1000"
 		this.userPosition = "";
 		this.pikeMapService
@@ -58,17 +66,21 @@ export class GooglemapComponent implements OnInit {
 		setTimeout(function () {
 			tmpthis.makeRequest();
 			tmpthis.loopRequest();
-		}, 5000);
+		}, 50000);
 	}
 
 	clickFree(marker) {
-		marker.state = "free"
+		marker.state = "free";
+		marker.iconUrl = "../../../assets/icones/marker-free.svg";
 		this.pikeMapService.changeState(marker);
+		this.pikeUserService.addPoint();
 	}
 
 	clickBusy(marker) {
-		marker.state = "busy"
+		marker.state = "busy";
+		marker.iconUrl = "../../../assets/icones/marker-busy.svg";
 		this.pikeMapService.changeState(marker);
+		this.pikeUserService.addPoint();
 	}
 
 	ngOnDestroy() {
