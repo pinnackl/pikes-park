@@ -28,15 +28,31 @@ export class GooglemapComponent implements OnInit {
 
 	location = {};
 
+	search(nameKey, myArray){
+	    for (var i=0; i < myArray.length; i++) {
+	        if (myArray[i].id === nameKey) {
+	            return myArray[i];
+	        }
+	    }
+	}
+
 	setPosition(position) {
 		this.location = position.coords;
-		this.markers.push({
-			id: position.coords.latitude + position.coords.longitude,
-			lat: position.coords.latitude,
-			long: position.coords.longitude,
-			state: "",
-			iconUrl: "../../../assets/icones/marker-user.svg"
-		});
+
+		var resultObject = this.search("user", this.markers);
+
+		if (resultObject) {
+			resultObject.lat =  position.coords.latitude;
+			resultObject.long =  position.coords.longitude;
+		} else {
+			this.markers.push({
+						id: "user",
+						lat: position.coords.latitude,
+						long: position.coords.longitude,
+						state: "",
+						iconUrl: "../../../assets/icones/marker-user.svg"
+					});
+		}
 
 		this.zoom = 18;
 		this.lat = position.coords.latitude;
