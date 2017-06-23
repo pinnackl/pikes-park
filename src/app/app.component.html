@@ -8,9 +8,6 @@
         </p>
 
         <p>{{ profile?.username }}</p>
-
-        <p ngIf=profile.points>Points : {{profile?.points}}</p>
-        <p ngIf=!profile.points>Points : 0</p>
       </div>
       <a class="menu-item" *ngFor="let menu of menus" routerLink="/{{menu.path}}" routerLinkActive="active" (click)="sidenav.close()">{{menu.name}}</a>
     </md-nav-list>
