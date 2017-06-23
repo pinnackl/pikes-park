@@ -34,8 +34,12 @@ export class GooglemapComponent implements OnInit {
              state: "",
              iconUrl: "../../../assets/icones/marker-user.svg"
 		});
-		//this.userPosition = "&geofilter.distance=" + position.coords.latitude + "%2C" + position.coords.longitude + "%2C" + "1000"
-		this.userPosition = "";
+
+		this.zoom = 18;
+		this.lat = position.coords.latitude;
+		this.lng = position.coords.longitude;
+		this.userPosition = "&geofilter.distance=" + position.coords.latitude + "%2C" + position.coords.longitude + "%2C" + "200"
+		//this.userPosition = "";
 		this.pikeMapService
 			.getParkLocation(this.userPosition)
 			.subscribe();
